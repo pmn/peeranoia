@@ -15,7 +15,10 @@
        (include-css "/css/site.css")]
       [:body
        [:h1 "peeranoia"]
-       [:div (escape-html (str r))]])))
+       [:div (escape-html (str r))]
+       [:ul
+        [:li (:remote-addr r)]
+        ]])))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
