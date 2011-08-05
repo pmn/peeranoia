@@ -8,22 +8,23 @@
             [compojure.handler :as handler]))
 
 (defn home-page
-  ([]
+  ([r]
      (html5
       [:head
        [:title "loaded"]
        (include-css "/css/site.css")]
       [:body
-       [:h1 "peeranoia"]])))
+       [:h1 "peeranoia"]
+       [:div (escape-html (str r))]])))
 
 (defroutes main-routes
-  (GET "/" [] (home-page))
+  (GET "/" [:as r] (home-page r))
+  (GET "/test" [] "<h1>testinggg</h1>")
   (route/resources "/")
   (route/not-found "404 - not found"))
 
 (def app
-  (-> main-routes
-      (wrap-base-url)))
+  (handler/site main-routes))
 
 (defn -main []
   (let [port (Integer/parseInt (get (System/getenv) "PORT" "8080"))]
