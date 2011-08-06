@@ -11,18 +11,20 @@
   ([r]
      (html5
       [:head
-       [:title "loaded"]
+       [:title "peeranoia"]
        (include-css "/css/site.css")]
       [:body
        [:h1 "peeranoia"]
        [:div (escape-html (str r))]
        [:ul
-        [:li (:remote-addr r)]
+        [:li (str "remote-addr:" (:remote-addr r))]
+        [:li (str "x-forwarded-for:" (:x-forwarded-for r))]
+        [:li (str "cookies:" (:cookies r))]
+        [:li (str "user-agent:" (get (:headers r) "user-agent"))]
         ]])))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
-  (GET "/test" [] "<h1>testinggg</h1>")
   (route/resources "/")
   (route/not-found "404 - not found"))
 
