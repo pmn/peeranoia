@@ -3,25 +3,30 @@
         hiccup.core
         hiccup.page-helpers
         hiccup.middleware
-        ring.adapter.jetty)
+        ring.adapter.jetty
+        ring.middleware.cookies)
   (:require [compojure.route :as route]
             [compojure.handler :as handler]))
 
 (defn home-page
   ([r]
-     (html5
-      [:head
-       [:title "peeranoia"]
-       (include-css "/css/site.css")]
-      [:body
-       [:div#content
-       [:h1 "peeranoia"]
-        [:div.infoblock "Your IP is: "
-         [:label (get (:headers r) "x-real-ip")]]
-        [:div.infoblock "Your User-Agent is: "
-         [:label (get (:headers r) "user-agent")]]
-        [:div.infoblock "Cookies: "
-         [:label (:cookies r)]]]])))
+     {:status 200
+      :headers {"Content-Type" "text/html"}
+      :cookies {:value "saved", :path "/", :domain "peeranoia.com" }
+      :body
+      (html5
+       [:head
+        [:title "peeranoia"]
+        (include-css "/css/site.css")]
+       [:body
+        [:div#content
+         [:h2 "peeranoia"]
+         [:div.infoblock "Your IP is: "
+          [:label (get (:headers r) "x-real-ip")]]
+         [:div.infoblock "Your User-Agent is: "
+          [:label (get (:headers r) "user-agent")]]
+         [:div.infoblock "Cookies: "
+          [:label (escape-html (:cookies r))]]]])}))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
@@ -29,7 +34,8 @@
   (route/not-found "404 - not found"))
 
 (def app
-  (handler/site main-routes))
+  (-> handler/site main-routes
+      (wrap-cookies)))
 
 (defn -main []
   (let [port (Integer/parseInt (get (System/getenv) "PORT" "8080"))]
