@@ -19,6 +19,7 @@
        [:ul
         [:li (str "remote-addr:" (:remote-addr r))]
         [:li (str "x-forwarded-for:" (:x-forwarded-for r))]
+        [:li (str "x-real-ip: " (:x-real-ip r))]
         [:li (str "cookies:" (:cookies r))]
         [:li (str "user-agent:" (get (:headers r) "user-agent"))]
         ]])))
