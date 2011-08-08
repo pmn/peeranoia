@@ -1,13 +1,5 @@
 # peeranoia
 
-FIXME: write description
+A quick hack to show IP, user-agent & whether cookies have been reset
 
-## Usage
 
-FIXME: write
-
-## License
-
-Copyright (C) 2011 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
