@@ -18,8 +18,8 @@
        [:div (escape-html (str r))]
        [:ul
         [:li (str "remote-addr:" (:remote-addr r))]
-        [:li (str "x-forwarded-for:" (:x-forwarded-for r))]
-        [:li (str "x-real-ip: " (:x-real-ip r))]
+        [:li (str "x-forwarded-for:" (get (:headers r) "x-forwarded-for"))]
+        [:li (str "x-real-ip: " (get (:headers r) "x-real-ip"))]
         [:li (str "cookies:" (:cookies r))]
         [:li (str "user-agent:" (get (:headers r) "user-agent"))]
         ]])))
