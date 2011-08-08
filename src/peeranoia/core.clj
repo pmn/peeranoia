@@ -17,7 +17,7 @@
                           (inc 
                            (Integer/parseInt
                             (:value (get (:cookies r) "value")))))
-                         (catch Exception e "0")),
+                         (catch Exception e "1")),
                 :path "/",
                 :domain "peeranoia.com" }
       :body
