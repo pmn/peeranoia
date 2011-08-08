@@ -10,14 +10,15 @@
 
 (defn home-page
   ([r]
+     (let [visits (try
+                    (str
+                     (inc 
+                      (Integer/parseInt
+                       (:value (get (:cookies r) "value")))))
+                    (catch Exception e "1"))]
      {:status 200
       :headers {"Content-Type" "text/html"}
-      :cookies {:value (try
-                         (str
-                          (inc 
-                           (Integer/parseInt
-                            (:value (get (:cookies r) "value")))))
-                         (catch Exception e "1")),
+      :cookies {:value visits,
                 :path "/",
                 :domain "peeranoia.com" }
       :body
@@ -32,8 +33,8 @@
           [:label (get (:headers r) "x-real-ip")]]
          [:div.infoblock "Your User-Agent is: "
           [:label (get (:headers r) "user-agent")]]
-         [:div.infoblock "You cookies report that you have been here: "
-          [:label (str (:value (get (:cookies r) "value")) " times")]]]])}))
+         [:div.infoblock "Your cookies report that you have been here: "
+          [:label (str visits " times")]]]])})))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
