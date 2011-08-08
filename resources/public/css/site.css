@@ -1,4 +1,22 @@
-body 
-{
+body {
+    font-family: sans-serif;
     background-color: #F0F0F0;
+}
+
+#content {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.infoblock {
+    padding: .5em;
+}
+
+.infoblock label {
+    display: block;
+    color: #202020;
+    font-weight:bold;
+    padding-top: .2em;
+    padding-left: 3em;
 }

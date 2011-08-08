@@ -14,15 +14,14 @@
        [:title "peeranoia"]
        (include-css "/css/site.css")]
       [:body
+       [:div#content
        [:h1 "peeranoia"]
-       [:div (escape-html (str r))]
-       [:ul
-        [:li (str "remote-addr:" (:remote-addr r))]
-        [:li (str "x-forwarded-for:" (get (:headers r) "x-forwarded-for"))]
-        [:li (str "x-real-ip: " (get (:headers r) "x-real-ip"))]
-        [:li (str "cookies:" (:cookies r))]
-        [:li (str "user-agent:" (get (:headers r) "user-agent"))]
-        ]])))
+        [:div.infoblock "Your IP is: "
+         [:label (get (:headers r) "x-real-ip")]]
+        [:div.infoblock "Your User-Agent is: "
+         [:label (get (:headers r) "user-agent")]]
+        [:div.infoblock "Cookies: "
+         [:label (:cookies r)]]]])))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
