@@ -12,7 +12,12 @@
   ([r]
      {:status 200
       :headers {"Content-Type" "text/html"}
-      :cookies {:value "saved", :path "/", :domain "peeranoia.com" }
+      :cookies {:value (str
+                        (inc 
+                         (Integer/parseInt
+                          (:value (get (:cookies r) "value"))))),
+                :path "/",
+                :domain "peeranoia.com" }
       :body
       (html5
        [:head
@@ -25,8 +30,8 @@
           [:label (get (:headers r) "x-real-ip")]]
          [:div.infoblock "Your User-Agent is: "
           [:label (get (:headers r) "user-agent")]]
-         [:div.infoblock "Cookies: "
-          [:label (escape-html (:cookies r))]]]])}))
+         [:div.infoblock "You cookies report that you have been here: "
+          [:label (str (:value (get (:cookies r) "value")) " times")]]]])}))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
