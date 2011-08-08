@@ -34,7 +34,7 @@
   (route/not-found "404 - not found"))
 
 (def app
-  (-> handler/site main-routes
+  (-> (handler/site main-routes)
       (wrap-cookies)))
 
 (defn -main []
