@@ -12,10 +12,12 @@
   ([r]
      {:status 200
       :headers {"Content-Type" "text/html"}
-      :cookies {:value (str
-                        (inc 
-                         (Integer/parseInt
-                          (:value (get (:cookies r) "value"))))),
+      :cookies {:value (try
+                         (str
+                          (inc 
+                           (Integer/parseInt
+                            (:value (get (:cookies r) "value")))))
+                         (catch Exception e "0")),
                 :path "/",
                 :domain "peeranoia.com" }
       :body
