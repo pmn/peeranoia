@@ -37,7 +37,7 @@
          [:div.infoblock "Your cookies report that you have been here: "
           [:label (str visits " times")]]
          (when-not (nil? referer)
-           [:div.infoblock "You were refered here by: "
+           [:div.infoblock "You were referred here by: "
             [:label referer]])
          [:p]
          [:div.infoblock "Full headers: "
