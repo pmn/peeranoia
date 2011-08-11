@@ -34,7 +34,11 @@
          [:div.infoblock "Your User-Agent is: "
           [:label (get (:headers r) "user-agent")]]
          [:div.infoblock "Your cookies report that you have been here: "
-          [:label (str visits " times")]]]
+          [:label (str visits " times")]]
+         [:p]
+         [:div.infoblock "Full headers: "
+          [:label (escape-html (:headers r))]]]
+        
         (include-js "/js/g.js")])})))
 
 (defroutes main-routes
