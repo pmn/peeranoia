@@ -15,7 +15,8 @@
                      (inc 
                       (Integer/parseInt
                        (:value (get (:cookies r) "value")))))
-                    (catch Exception e "1"))]
+                    (catch Exception e "1"))
+           referer (get (:headers r) "referer")]
      {:status 200
       :headers {"Content-Type" "text/html"}
       :cookies {:value visits,
@@ -35,12 +36,12 @@
           [:label (get (:headers r) "user-agent")]]
          [:div.infoblock "Your cookies report that you have been here: "
           [:label (str visits " times")]]
-         [:div.infoblock "You were refered here by: "
-          [:label (get (:headers r) "referer")]]
+         (when-not (nil? referer)
+           [:div.infoblock "You were refered here by: "
+            [:label referer]])
          [:p]
          [:div.infoblock "Full headers: "
           [:label (escape-html (:headers r))]]]
-        
         (include-js "/js/g.js")])})))
 
 (defroutes main-routes
