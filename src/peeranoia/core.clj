@@ -35,6 +35,8 @@
           [:label (get (:headers r) "user-agent")]]
          [:div.infoblock "Your cookies report that you have been here: "
           [:label (str visits " times")]]
+         [:div.infoblock "You were refered here by: "
+          [:label (get (:headers r) "referer")]]
          [:p]
          [:div.infoblock "Full headers: "
           [:label (escape-html (:headers r))]]]
