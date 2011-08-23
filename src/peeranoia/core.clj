@@ -37,7 +37,7 @@
                         :ip (get (:headers r) "x-real-ip")
                         :user-agent (get (:headers r) "user-agent")
                         :headers (:headers r)}]
-       {:cookies {:value "1",
+       {:cookies {:value (:visits header-info),
                   :path "/",
                   :domain "peeranoia.com" }
         :body
