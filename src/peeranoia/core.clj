@@ -33,16 +33,15 @@
 (defn home-page
   ([r]
      (let [header-info {:visits (-> r :cookies (get "value") :value Integer/parseInt inc str)
-                 :referer (get (:headers r) "referer")
-                 :ip (get (:headers r) "x-real-ip")
-                 :user-agent (get (:headers r) "user-agent")
-                 :headers (:headers r)}]
-     {:cookies {:value "1",
-                :path "/",
-                :domain "peeranoia.com" }
-      :body
-      (render-page header-info)})))
-
+                        :referer (get (:headers r) "referer")
+                        :ip (get (:headers r) "x-real-ip")
+                        :user-agent (get (:headers r) "user-agent")
+                        :headers (:headers r)}]
+       {:cookies {:value "1",
+                  :path "/",
+                  :domain "peeranoia.com" }
+        :body
+        (render-page header-info)})))
 
 (defroutes main-routes
   (GET "/" [:as r] (home-page r))
