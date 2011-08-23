@@ -10,16 +10,9 @@
 
 (defn home-page
   ([r]
-     (let [visits (try
-                    (str
-                     (inc 
-                      (Integer/parseInt
-                       (:value (get (:cookies r) "value")))))
-                    (catch Exception e "1"))
+     (let [visits (-> r :cookies (get "value") :value Integer/parseInt inc str)
            referer (get (:headers r) "referer")]
-     {:status 200
-      :headers {"Content-Type" "text/html"}
-      :cookies {:value visits,
+     {:cookies {:value visits,
                 :path "/",
                 :domain "peeranoia.com" }
       :body
