@@ -13,7 +13,7 @@ body {
     padding: .5em;
 }
 
-.infoblock label {
+.infoblock span {
     display: block;
     color: #202020;
     font-weight:bold;
