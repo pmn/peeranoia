@@ -30,9 +30,15 @@
       [:span (escape-html headers)]]]
     (include-js "/js/g.js")]))
 
+(defn- add-visit
+  [visitcount]
+  (if-not (nil? visitcount)
+     (-> visitcount Integer/parseInt inc str)
+     "1"))
+
 (defn home-page
   ([r]
-     (let [header-info {:visits (-> r :cookies (get "value") :value Integer/parseInt inc str)
+     (let [header-info {:visits (add-visit (:value (get (:cookies r) "value")))
                         :referer (get (:headers r) "referer")
                         :ip (get (:headers r) "x-real-ip")
                         :user-agent (get (:headers r) "user-agent")
